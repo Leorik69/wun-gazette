@@ -1,0 +1,1 @@
+Vite 7 + @vitejs/plugin-react 5 on React 19 with TypeScript 5 (ESNext modules, react-jsx runtime); Three.js 0.187 for 3D rendering; lucide-react for iconography; deployed to Vercel as a Vite framework.

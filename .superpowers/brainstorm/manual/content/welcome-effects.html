@@ -1,0 +1,193 @@
+<style>
+  .effect-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .effect {
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 22px;
+    background: #070a11;
+    cursor: pointer;
+    transition: .25s ease;
+  }
+  .effect:hover { transform: translateY(-4px); border-color: rgba(216,190,103,.42); }
+  .effect.selected { border-color: #d9b859; box-shadow: 0 0 0 1px rgba(217,184,89,.35); }
+  .stage {
+    position: relative;
+    min-height: 380px;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .stage::before {
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:-3;
+    background:
+      radial-gradient(circle at 84% 24%, rgba(95,132,224,.2), transparent 27%),
+      radial-gradient(circle at 18% 78%, rgba(198,154,77,.1), transparent 30%),
+      linear-gradient(145deg,#090d17,#05070c 72%);
+  }
+  .stars {
+    position:absolute;
+    inset:0;
+    z-index:-2;
+    opacity:.3;
+    background-image:radial-gradient(circle,rgba(255,255,255,.75) 0 1px,transparent 1.2px);
+    background-size:38px 38px;
+  }
+  .kicker {
+    margin-bottom:14px;
+    font:600 10px/1.2 Inter,sans-serif;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:#d9ba64;
+  }
+  .headline {
+    margin:0;
+    font:500 42px/.94 Georgia,serif;
+    letter-spacing:-.05em;
+    color:#f6f2e9;
+  }
+  .headline em { font-style:normal; color:#c9bcff; }
+  .copy {
+    max-width:27em;
+    margin:18px 0 0;
+    font:400 13px/1.65 Inter,sans-serif;
+    color:rgba(230,234,244,.68);
+  }
+  .caption { padding:18px 20px 21px; }
+  .caption h3 { margin:0 0 7px; font-size:16px; }
+  .caption p { margin:0; font-size:13px; line-height:1.55; opacity:.72; }
+
+  /* A: cinematic light sweep */
+  .cinematic .headline {
+    color:transparent;
+    background:linear-gradient(100deg,#f7f3eb 10%,#f7f3eb 35%,#c9bcff 48%,#e5bc69 56%,#f7f3eb 70%);
+    background-size:250% 100%;
+    -webkit-background-clip:text;
+    animation:sweep 6s ease-in-out infinite;
+    filter:drop-shadow(0 0 18px rgba(190,170,255,.12));
+  }
+  .cinematic .beam {
+    position:absolute;
+    top:-20%; left:-35%;
+    width:28%; height:145%;
+    transform:skewX(-18deg);
+    background:linear-gradient(90deg,transparent,rgba(183,171,255,.08),transparent);
+    animation:beam 7s ease-in-out infinite;
+  }
+  @keyframes sweep { 0%,25%{background-position:100% 0} 70%,100%{background-position:0 0} }
+  @keyframes beam { 0%,25%{left:-35%} 75%,100%{left:120%} }
+
+  /* B: signal decode */
+  .signal .word {
+    display:inline-block;
+    opacity:0;
+    transform:translateY(14px);
+    animation:wordIn 5.5s ease infinite;
+  }
+  .signal .w2{animation-delay:.12s}.signal .w3{animation-delay:.24s}
+  .signal .w4{animation-delay:.36s}.signal .w5{animation-delay:.48s}
+  .signal .pulse {
+    position:absolute;
+    right:28px; top:30px;
+    width:8px; height:8px;
+    border-radius:50%;
+    background:#d9ba64;
+    box-shadow:0 0 18px #d9ba64;
+  }
+  .signal .pulse::before,.signal .pulse::after {
+    content:""; position:absolute; inset:-12px; border:1px solid rgba(207,187,255,.28);
+    border-radius:50%; animation:ripple 3s ease-out infinite;
+  }
+  .signal .pulse::after{animation-delay:1.5s}
+  @keyframes wordIn { 0%,6%{opacity:0;transform:translateY(14px);filter:blur(5px)} 16%,78%{opacity:1;transform:none;filter:blur(0)} 90%,100%{opacity:0} }
+  @keyframes ripple { 0%{transform:scale(.4);opacity:0} 20%{opacity:1} 100%{transform:scale(3.5);opacity:0} }
+
+  /* C: orbital */
+  .orbital .orbit {
+    position:absolute;
+    right:-12px; top:22px;
+    width:156px; height:58px;
+    border:1px solid rgba(218,186,99,.2);
+    border-radius:50%;
+    transform:rotate(-18deg);
+    box-shadow:0 0 15px rgba(218,186,99,.08);
+  }
+  .orbital .planet {
+    position:absolute;
+    width:10px;height:10px;border-radius:50%;
+    background:#8cbef1;
+    box-shadow:0 0 14px #6da4dc;
+    left:72px;top:-5px;
+    animation:orbitPulse 4s ease-in-out infinite;
+  }
+  .orbital .headline em {
+    display:inline-block;
+    text-shadow:0 0 22px rgba(177,159,255,.24);
+    animation:breathe 4.5s ease-in-out infinite;
+  }
+  .orbital .line {
+    width:72px;height:1px;margin-top:20px;
+    background:linear-gradient(90deg,#dbb95e,transparent);
+    box-shadow:0 0 12px rgba(219,185,94,.55);
+    animation:lineGrow 4.5s ease-in-out infinite;
+    transform-origin:left;
+  }
+  @keyframes orbitPulse { 0%,100%{transform:scale(.8);opacity:.55} 50%{transform:scale(1.25);opacity:1} }
+  @keyframes breathe { 0%,100%{filter:brightness(.9)} 50%{filter:brightness(1.2)} }
+  @keyframes lineGrow { 0%,100%{transform:scaleX(.35);opacity:.4} 50%{transform:scaleX(1);opacity:1} }
+  @media(max-width:900px){.effect-grid{grid-template-columns:1fr}.stage{min-height:320px}}
+</style>
+
+<h2>Какие эффекты подходят этому приветствию?</h2>
+<p class="subtitle">Текст остаётся тем же. Отличается только характер движения — все варианты будут медленными и отключатся при reduced motion.</p>
+
+<div class="effect-grid">
+  <div class="effect cinematic" data-choice="cinematic" onclick="toggleSelect(this)">
+    <div class="stage">
+      <div class="stars"></div><div class="beam"></div>
+      <div class="kicker">A nation beyond borders</div>
+      <h3 class="headline">Welcome to the nation<br>still becoming.</h3>
+      <p class="copy">A living digital world, built in public with the people who choose to call it theirs.</p>
+    </div>
+    <div class="caption">
+      <h3>A · Кинематографический свет</h3>
+      <p>Редкий световой перелив проходит по буквам, а за текстом медленно движется почти незаметный луч.</p>
+    </div>
+  </div>
+
+  <div class="effect signal" data-choice="signal" onclick="toggleSelect(this)">
+    <div class="stage">
+      <div class="stars"></div><div class="pulse"></div>
+      <div class="kicker">A nation beyond borders</div>
+      <h3 class="headline"><span class="word w1">Welcome</span> <span class="word w2">to the</span><br><span class="word w3">nation</span> <span class="word w4"><em>still</em></span> <span class="word w5"><em>becoming.</em></span></h3>
+      <p class="copy">A living digital world, built in public with the people who choose to call it theirs.</p>
+    </div>
+    <div class="caption">
+      <h3>B · Проявление сигнала</h3>
+      <p>Слова мягко собираются по очереди из размытия, а рядом расходится импульс сети Neutron.</p>
+    </div>
+  </div>
+
+  <div class="effect orbital" data-choice="orbital" onclick="toggleSelect(this)">
+    <div class="stage">
+      <div class="stars"></div><div class="orbit"><div class="planet"></div></div>
+      <div class="kicker">A nation beyond borders</div>
+      <h3 class="headline">Welcome to the nation<br><em>still becoming.</em></h3>
+      <p class="copy">A living digital world, built in public with the people who choose to call it theirs.</p>
+      <div class="line"></div>
+    </div>
+    <div class="caption">
+      <h3>C · Орбитальное дыхание</h3>
+      <p>Акцентная фраза едва «дышит», тонкая линия раскрывается, а небольшой орбитальный мотив связывает текст с гербом.</p>
+    </div>
+  </div>
+</div>

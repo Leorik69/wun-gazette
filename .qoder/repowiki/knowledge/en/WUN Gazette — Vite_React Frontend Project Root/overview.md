@@ -1,0 +1,1 @@
+Project root for the WUN Gazette static site, bootstrapping a Vite + React + TypeScript SPA that renders into #root and ships to Vercel.

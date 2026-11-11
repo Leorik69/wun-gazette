@@ -1,0 +1,170 @@
+<style>
+  .directions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .direction {
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 22px;
+    background: #080b13;
+    cursor: pointer;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .direction:hover {
+    transform: translateY(-4px);
+    border-color: rgba(216,190,103,.45);
+    box-shadow: 0 22px 70px rgba(0,0,0,.38);
+  }
+  .direction.selected {
+    border-color: #d9b859;
+    box-shadow: 0 0 0 1px rgba(217,184,89,.35), 0 22px 70px rgba(0,0,0,.48);
+  }
+  .preview {
+    position: relative;
+    min-height: 390px;
+    padding: 34px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .preview::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background:
+      radial-gradient(circle at 78% 22%, rgba(108,89,217,.2), transparent 26%),
+      radial-gradient(circle at 18% 80%, rgba(214,170,85,.12), transparent 30%),
+      linear-gradient(150deg,#0a0e18,#05070d 68%);
+  }
+  .preview::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: .3;
+    background-image: radial-gradient(circle, rgba(255,255,255,.8) 0 1px, transparent 1.3px);
+    background-size: 42px 42px;
+  }
+  .eyebrow {
+    margin-bottom: 15px;
+    font: 600 10px/1.2 Inter, sans-serif;
+    letter-spacing: .22em;
+    color: #d8ba65;
+    text-transform: uppercase;
+  }
+  .display {
+    margin: 0;
+    font: 500 49px/.92 Georgia, serif;
+    letter-spacing: -.05em;
+    color: #f5f1e8;
+  }
+  .display .glow {
+    color: transparent;
+    background: linear-gradient(100deg,#fff 4%,#c9bcff 45%,#e6bc65 92%);
+    -webkit-background-clip: text;
+    filter: drop-shadow(0 0 18px rgba(176,154,255,.16));
+  }
+  .lead {
+    max-width: 29em;
+    margin: 20px 0 0;
+    font: 400 14px/1.65 Inter, sans-serif;
+    color: rgba(231,234,244,.68);
+  }
+  .line {
+    width: 58px;
+    height: 1px;
+    margin-top: 23px;
+    background: linear-gradient(90deg,#dab95b,transparent);
+    box-shadow: 0 0 12px rgba(218,185,91,.6);
+  }
+  .b .preview::before {
+    background:
+      radial-gradient(ellipse at 50% 18%, rgba(216,182,86,.16), transparent 32%),
+      linear-gradient(180deg,#0b0e16,#05070b);
+  }
+  .b .preview { text-align: center; justify-content: center; align-items: center; }
+  .b .display { font-size: 45px; }
+  .b .lead { max-width: 26em; }
+  .b .line { width: 92px; background: linear-gradient(90deg,transparent,#dab95b,transparent); }
+  .c .preview::before {
+    background:
+      radial-gradient(circle at 86% 28%, rgba(94,140,231,.21), transparent 26%),
+      linear-gradient(135deg,#070b14,#0c0912);
+  }
+  .c .display { font-size: 44px; }
+  .c .signal {
+    position: absolute;
+    right: 28px;
+    top: 28px;
+    width: 88px;
+    height: 88px;
+    border: 1px solid rgba(215,183,91,.26);
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(120,105,240,.16), inset 0 0 22px rgba(215,183,91,.08);
+  }
+  .c .signal::before,.c .signal::after {
+    content:"";
+    position:absolute;
+    inset:16px;
+    border:1px solid rgba(182,169,255,.2);
+    border-radius:50%;
+  }
+  .c .signal::after { inset:32px; background:#d9b95e; box-shadow:0 0 16px #d9b95e; }
+  .meta { padding: 18px 20px 21px; }
+  .meta h3 { margin: 0 0 7px; font-size: 16px; }
+  .meta p { margin: 0; font-size: 13px; line-height: 1.55; opacity: .72; }
+  @media (max-width: 900px) {
+    .directions { grid-template-columns: 1fr; }
+    .preview { min-height: 320px; }
+  }
+</style>
+
+<h2>Как должно звучать первое приветствие?</h2>
+<p class="subtitle">Три направления соединяют открытие нового мира и рождение государства. Нажмите на вариант, который ближе.</p>
+
+<div class="directions">
+  <div class="direction a" data-choice="a" onclick="toggleSelect(this)">
+    <div class="preview">
+      <div class="eyebrow">Welcome to World Union Nation</div>
+      <h3 class="display">A new world<br><span class="glow">begins with us.</span></h3>
+      <p class="lead">Enter a digital nation shaped by its citizens — one passport, one shared future, and a world still being built.</p>
+      <div class="line"></div>
+    </div>
+    <div class="meta">
+      <h3>A · Приглашение в новый мир</h3>
+      <p>Теплее и человечнее. Главная мысль — государство начинается с людей, которые входят сейчас.</p>
+    </div>
+  </div>
+
+  <div class="direction b" data-choice="b" onclick="toggleSelect(this)">
+    <div class="preview">
+      <div class="eyebrow">World Union Nation</div>
+      <h3 class="display">The first page<br>of a new nation<br><span class="glow">is being written.</span></h3>
+      <p class="lead">You are invited to witness its beginning — and help shape what comes next.</p>
+      <div class="line"></div>
+    </div>
+    <div class="meta">
+      <h3>B · Исторический момент</h3>
+      <p>Торжественнее и серьёзнее. Создаёт ощущение, что посетитель оказался у начала большой истории.</p>
+    </div>
+  </div>
+
+  <div class="direction c" data-choice="c" onclick="toggleSelect(this)">
+    <div class="preview">
+      <div class="signal"></div>
+      <div class="eyebrow">A nation beyond borders</div>
+      <h3 class="display">Welcome to the nation<br><span class="glow">still becoming.</span></h3>
+      <p class="lead">A living digital world, built in public with the people who choose to call it theirs.</p>
+      <div class="line"></div>
+    </div>
+    <div class="meta">
+      <h3>C · Живое государство</h3>
+      <p>Самый необычный и концептуальный вариант. Подчёркивает, что WUN уже живёт, но продолжает формироваться.</p>
+    </div>
+  </div>
+</div>

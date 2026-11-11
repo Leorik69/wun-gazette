@@ -1,0 +1,2 @@
+- TypeScript is configured with strict mode and no unused locals/parameters, and JSX is compiled via the modern `react-jsx` transform rather than classic JSX.
+- Module resolution uses bundler-style resolution (`moduleResolution: "bundler"`) matching Vite's expectations instead of node resolution.

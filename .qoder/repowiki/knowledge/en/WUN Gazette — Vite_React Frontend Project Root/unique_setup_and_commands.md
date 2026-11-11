@@ -1,0 +1,1 @@
+`npm run dev` starts the Vite dev server; `npm run build` first runs `tsc --noEmit` for type-checking then builds via Vite; `npm run preview` serves the built `dist`; `npm run test:hero` executes the Node-native test runner against `src/heroWelcome.test.mjs`.

@@ -1,0 +1,147 @@
+<style>
+  .final-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .final-stage {
+    position: relative;
+    min-height: 540px;
+    padding: 64px 58px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    isolation: isolate;
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 26px;
+    background: #070a11;
+    box-shadow: 0 28px 90px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  .final-stage::before {
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:-4;
+    background:
+      radial-gradient(circle at 82% 22%,rgba(105,91,211,.22),transparent 28%),
+      radial-gradient(circle at 15% 82%,rgba(207,161,76,.1),transparent 32%),
+      linear-gradient(145deg,#0a0e18,#05070d 70%);
+  }
+  .starfield {
+    position:absolute;inset:0;z-index:-3;opacity:.28;
+    background-image:radial-gradient(circle,rgba(255,255,255,.8) 0 1px,transparent 1.25px);
+    background-size:44px 44px;
+  }
+  .light-beam {
+    position:absolute;
+    z-index:-1;
+    top:-30%;left:-38%;
+    width:25%;height:170%;
+    transform:skewX(-17deg);
+    background:linear-gradient(90deg,transparent,rgba(192,180,255,.075),transparent);
+    animation:beam 8s ease-in-out infinite;
+  }
+  .copy-wrap { max-width: 790px; }
+  .kicker {
+    margin-bottom:18px;
+    font:600 11px/1.2 Inter,sans-serif;
+    letter-spacing:.24em;
+    color:#d9ba64;
+    text-transform:uppercase;
+  }
+  .headline {
+    margin:0;
+    font:500 clamp(54px,7vw,88px)/.9 Georgia,serif;
+    letter-spacing:-.055em;
+  }
+  .word {
+    display:inline-block;
+    color:transparent;
+    background:linear-gradient(100deg,#f7f3eb 7%,#f7f3eb 36%,#c9bcff 49%,#e4ba66 57%,#f7f3eb 72%);
+    background-size:250% 100%;
+    -webkit-background-clip:text;
+    opacity:0;
+    transform:translateY(18px);
+    filter:blur(7px);
+    animation:reveal 8s cubic-bezier(.22,.75,.2,1) infinite, shimmer 8s ease-in-out infinite;
+  }
+  .w2{animation-delay:.1s}.w3{animation-delay:.2s}.w4{animation-delay:.3s}.w5{animation-delay:.4s}
+  .lead {
+    max-width:580px;
+    margin:26px 0 0;
+    font:400 17px/1.65 Inter,sans-serif;
+    color:rgba(231,234,244,.7);
+  }
+  .signal {
+    position:absolute;
+    right:58px;top:56px;
+    width:7px;height:7px;border-radius:50%;
+    background:#dab95f;
+    box-shadow:0 0 16px #dab95f;
+  }
+  .signal::before,.signal::after {
+    content:"";position:absolute;inset:-14px;border:1px solid rgba(202,190,255,.22);
+    border-radius:50%;animation:ripple 4s ease-out infinite;
+  }
+  .signal::after{animation-delay:2s}
+  .rule {
+    width:74px;height:1px;margin-top:28px;
+    background:linear-gradient(90deg,#dab95f,transparent);
+    box-shadow:0 0 12px rgba(218,185,95,.55);
+  }
+  .notes {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin-top:18px;
+  }
+  .note {
+    padding:16px 17px;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:15px;
+    background:rgba(10,13,22,.45);
+  }
+  .note strong{display:block;margin-bottom:6px;font-size:13px}
+  .note span{font-size:12px;line-height:1.5;opacity:.68}
+  @keyframes reveal {
+    0%,5%{opacity:0;transform:translateY(18px);filter:blur(7px)}
+    15%,78%{opacity:1;transform:none;filter:blur(0)}
+    92%,100%{opacity:0;filter:blur(3px)}
+  }
+  @keyframes shimmer{0%,30%{background-position:100% 0}75%,100%{background-position:0 0}}
+  @keyframes beam{0%,22%{left:-38%}78%,100%{left:120%}}
+  @keyframes ripple{0%{transform:scale(.4);opacity:0}20%{opacity:1}100%{transform:scale(4.2);opacity:0}}
+  @media(max-width:720px){
+    .final-stage{min-height:500px;padding:38px 28px}
+    .signal{right:30px;top:34px}
+    .notes{grid-template-columns:1fr}
+  }
+</style>
+
+<h2>Итоговая концепция: кинематографический сигнал</h2>
+<p class="subtitle">A + B в одном спокойном цикле. Это макет поведения, а не финальная пиксельная копия страницы.</p>
+
+<div class="final-wrap">
+  <div class="final-stage">
+    <div class="starfield"></div>
+    <div class="light-beam"></div>
+    <div class="signal"></div>
+    <div class="copy-wrap">
+      <div class="kicker">A nation beyond borders</div>
+      <h3 class="headline">
+        <span class="word w1">Welcome</span>
+        <span class="word w2">to the</span><br>
+        <span class="word w3">nation</span>
+        <span class="word w4">still</span>
+        <span class="word w5">becoming.</span>
+      </h3>
+      <p class="lead">A living digital world, built in public with the people who choose to call it theirs.</p>
+      <div class="rule"></div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <div class="note"><strong>Появление</strong><span>Слова входят по очереди из мягкого размытия, без «печатной машинки».</span></div>
+    <div class="note"><strong>Свет</strong><span>После сборки фразы по буквам проходит холодно-золотой отблеск.</span></div>
+    <div class="note"><strong>Ритм</strong><span>Один медленный цикл около 8 секунд; reduced motion показывает статичный текст.</span></div>
+  </div>
+</div>

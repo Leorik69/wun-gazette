@@ -1,0 +1,16 @@
+schema_version: 1
+module_path: ""
+title: WUN Gazette — Vite/React Frontend Project Root
+scope:
+    - .gitignore
+    - .vercelignore
+    - index.html
+    - package.json
+    - package-lock.json
+    - tsconfig.json
+    - vercel.json
+    - vite.config.ts
+    - emblem.svg
+source_files: []
+depends_on: []
+related_to: []

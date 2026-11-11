@@ -1,0 +1,24 @@
+# 知识卡导出索引文件
+schema_version: 1
+locale: en-US
+branch: Q0DeR-MaG1C-BrAnCh-Fo2-NoN-GiT-Or-No-C0MmIt
+nodes_managed: true
+exported_at: "2026-11-06T05:25:39Z"
+modules:
+    "":
+        dir_name: WUN Gazette — Vite_React Frontend Project Root
+        title: WUN Gazette — Vite/React Frontend Project Root
+        scope:
+            - .gitignore
+            - .vercelignore
+            - index.html
+            - package.json
+            - package-lock.json
+            - tsconfig.json
+            - vercel.json
+            - vite.config.ts
+            - emblem.svg
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
